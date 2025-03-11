@@ -103,11 +103,18 @@ def find_best_move(board_state, difficulty):
         tie_board_states = []
         board_state_to_return = []
         for col in column_array:
+            '''
             for i, entry in enumerate(col):
                 if entry == 0: 
                     if col[i + 1] != 0:
                         index = i
                         break
+            '''
+            for i in range(len(col) - 1, -1, -1):  # Start from the bottom row
+                if col[i] == 0:
+                    index = i
+                    break
+
             if index != -1:
                 col[index] = 2.0
                 new_board_state = convert_to_board_state(col1, col2, col3, col4, col5, col6, col7)
@@ -147,10 +154,27 @@ def find_best_move(board_state, difficulty):
 if __name__ == "__main__":
     input = [0., 0., 0., 0., 0., 0., 0.,
             0., 0., 0., 0., 0., 0., 0.,
-            0., 0., 0., 0., 0., 1., 0.,
-            1., 2., 1., 2., 2., 2., 0.,
-            1., 1., 2., 2., 1., 1., 1.,
-            2., 1., 2., 1., 2., 1., 2.,]
+            0., 0., 0., 0., 0., 0., 0.,
+            0., 0., 0., 0., 2., 0., 0.,
+            0., 1., 2., 2., 1., 1., 1.,
+            0., 1., 2., 1., 2., 1., 2.,]
     difficulty = "hard"
     board_state = find_best_move(input, difficulty)
     print(board_state)
+
+'''
+            [0., 0., 0., 0., 0., 0., 0.,
+            0., 0., 0., 0., 0., 0., 0.,
+            0., 0., 0., 0., 0., 0., 0.,
+            0., 0., 0., 0., 0., 0., 0.,
+            1., 0., 0., 0., 0., 0., 0.,
+            2., 0., 0., 0., 0., 0., 0.,]
+
+            [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 
+            0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 
+            0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 
+            0.0, 0.0, 2.0, 0.0, 2.0, 0.0, 0.0, 
+            0.0, 1.0, 2.0, 2.0, 1.0, 1.0, 1.0,
+            0.0, 1.0, 2.0, 1.0, 2.0, 1.0, 2.0]
+
+'''
